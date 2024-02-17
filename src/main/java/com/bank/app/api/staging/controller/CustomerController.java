@@ -5,7 +5,7 @@ import com.bank.app.api.staging.dto.CustomerDTO;
 import com.bank.app.api.staging.services.CustomerService;
 import com.bank.app.domain.common.error.exceptions.DataCreationError;
 import com.bank.app.domain.common.error.exceptions.DataNotFoundException;
-import com.bank.app.domain.staging.entities.Customer;
+import com.bank.app.domain.staging.entities.StgCustomer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -34,19 +34,19 @@ public class CustomerController {
     public ResponseEntity<CustomerDTO> createCustomer(@RequestBody CustomerDTO customerDTO) throws DataCreationError {
         LOGGER.info("Inside createCustomer() with Customer : {}",customerDTO);
         // Add debugging statement to log cName
-        LOGGER.info("cName in CustomerDTO: {}", customerDTO.getCName());
-        Customer customer=customerConverter.customerConverter(customerDTO);
+        LOGGER.info("cName in CustomerDTO: {}", customerDTO.getCustName());
+        StgCustomer stgCustomer =customerConverter.customerConverter(customerDTO);
 
         // Add debugging statement to log cName in Customer
-        LOGGER.info("cName in Customer: {}", customer.getCName());
-        return ResponseEntity.status(HttpStatus.CREATED).body(customerService.createCustomer(customer));
+        LOGGER.info("cName in Customer: {}", customerDTO.getCustName());
+        return ResponseEntity.status(HttpStatus.CREATED).body(customerService.createCustomer(stgCustomer));
     }
 
     @PostMapping("/customers/")
     public ResponseEntity<List<CustomerDTO>> createAllCustomer(@RequestBody List<CustomerDTO> customerDTOs) throws DataCreationError {
         LOGGER.info("Inside createAllCustomer() with Customers : {}",customerDTOs);
-        List<Customer> customers=customerConverter.customerListConverter(customerDTOs);
-        return ResponseEntity.status(HttpStatus.CREATED).body(customerService.createCustomers(customers));
+        List<StgCustomer> stgCustomers =customerConverter.customerListConverter(customerDTOs);
+        return ResponseEntity.status(HttpStatus.CREATED).body(customerService.createCustomers(stgCustomers));
     }
 
     @GetMapping("/customer/{id}")

@@ -17,7 +17,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class Account {
+public class StgAccount {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +41,6 @@ public class Account {
 
 	@OneToMany(mappedBy = "accountId")
 	@JsonIgnore
-	private List<Relationship> relationships;
+	private List<StgRelationship> stgRelationships;
 
 }

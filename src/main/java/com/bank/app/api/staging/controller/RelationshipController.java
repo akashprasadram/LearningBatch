@@ -5,7 +5,7 @@ import com.bank.app.api.staging.dto.RelationshipDTO;
 import com.bank.app.api.staging.services.RelationshipService;
 import com.bank.app.domain.common.error.exceptions.DataCreationError;
 import com.bank.app.domain.common.error.exceptions.DataNotFoundException;
-import com.bank.app.domain.staging.entities.Relationship;
+import com.bank.app.domain.staging.entities.StgRelationship;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -31,16 +31,16 @@ public class RelationshipController {
 
     @PostMapping("/relationship/")
     public ResponseEntity<RelationshipDTO> createRelationship(@RequestBody RelationshipDTO relationshipDTO) throws DataCreationError {
-        LOGGER.info("Inside createRelationship() with Relationship : {}", relationshipDTO);
-        Relationship relationship = relationshipConverter.relationshipConverter(relationshipDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(relationshipService.createRelationship(relationship));
+        LOGGER.info("Inside createRelationship() with Relationship : {}",relationshipDTO);
+        StgRelationship stgRelationship =relationshipConverter.relationshipConverter(relationshipDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(relationshipService.createRelationship(stgRelationship));
     }
 
     @PostMapping("/relationships/")
     public ResponseEntity<List<RelationshipDTO>> createAllRelationship(@RequestBody List<RelationshipDTO> relationshipDTOs) throws DataCreationError {
-        LOGGER.info("Inside createAllRelationship() with Relationships : {}", relationshipDTOs);
-        List<Relationship> relationships = relationshipConverter.relationshipListConverter(relationshipDTOs);
-        return ResponseEntity.status(HttpStatus.CREATED).body(relationshipService.createRelationships(relationships));
+        LOGGER.info("Inside createAllRelationship() with Relationships : {}",relationshipDTOs);
+        List<StgRelationship> stgRelationships =relationshipConverter.relationshipListConverter(relationshipDTOs);
+        return ResponseEntity.status(HttpStatus.CREATED).body(relationshipService.createRelationships(stgRelationships));
     }
 
     @GetMapping("/relationship/{id}")
