@@ -35,10 +35,12 @@ public class Customer {
 	@Temporal(TemporalType.DATE)
 	private Date dob;
 
+	@Size(min = 2, max = 50)
+	private String address;
+
 	@OneToMany(mappedBy = "customerId")
 	@JsonIgnore
 	private List<Relationship> relationships;
 
-	@Size(min = 2, max = 50)
-	private String address;
+
 }

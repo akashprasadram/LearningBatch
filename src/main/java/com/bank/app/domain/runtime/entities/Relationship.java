@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.bank.app.util.AccountType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
