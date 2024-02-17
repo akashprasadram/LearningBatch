@@ -2,12 +2,12 @@ package com.bank.app.api.staging.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
@@ -17,11 +17,11 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerDTO {
+public class StgCustomerDTO {
 
-	private Long custId;
+	private Long customerId;
 
-	private String custName;
+	private String customerName;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "Asia/Kolkata")
@@ -32,6 +32,6 @@ public class CustomerDTO {
 	private String address;
 
 	@JsonIgnore
-    private List<RelationshipDTO> relationshipDTOS;
+    private List<StgRelationshipDTO> stgRelationshipDTOS;
 
 }

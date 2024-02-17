@@ -1,8 +1,7 @@
 package com.bank.app.domain.staging.entities;
 
-import javax.persistence.*;
-
 import com.bank.app.util.AccountType;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,16 +14,16 @@ import lombok.ToString;
 public class StgRelationship {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
-	private StgCustomer stgCustomerId;
+	private StgCustomer customerId;
 
 	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id")
-	private StgAccount stgAccountId;
+	private StgAccount accountId;
 	
 	@Enumerated(EnumType.STRING)
 	private AccountType type;

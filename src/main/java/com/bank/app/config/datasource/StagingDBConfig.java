@@ -1,10 +1,9 @@
 package com.bank.app.config.datasource;
 
 import java.util.Properties;
-
-import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import jakarta.persistence.EntityManagerFactory;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.ConfigurationProperties;

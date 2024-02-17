@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bank.app.domain.runtime.entities.Account;
 
-@Repository("prodAccountRepo")
+@Repository
 public interface AccountRepo extends JpaRepository<Account, Long> {
 
 }

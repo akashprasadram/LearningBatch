@@ -3,9 +3,10 @@ package com.bank.app.config.datasource;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.persistence.EntityManagerFactory;
+
 import javax.sql.DataSource;
 
+import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -25,7 +26,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 )
 @EntityScan(basePackages = {"com.bank.app.domain.runtime.entities"})
 public class RuntimeDBConfig {
-	
+
 	@Bean
 	@ConfigurationProperties(prefix = "spring.runtimedatasource")
 	DataSource runtimeDataSource() {

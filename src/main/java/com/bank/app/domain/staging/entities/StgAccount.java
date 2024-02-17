@@ -3,12 +3,13 @@ package com.bank.app.domain.staging.entities;
 import com.bank.app.util.AccountStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
+
 import java.util.Date;
 import java.util.List;
 
@@ -20,9 +21,9 @@ import java.util.List;
 public class StgAccount {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "a_id")
-	private Long aId;
+	private Long accountId;
 
 	@Enumerated(EnumType.STRING)
 	private AccountStatus status;

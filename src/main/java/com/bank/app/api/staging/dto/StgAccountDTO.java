@@ -3,13 +3,13 @@ package com.bank.app.api.staging.dto;
 import com.bank.app.util.AccountStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import java.util.Date;
 import java.util.List;
 
@@ -19,9 +19,9 @@ import java.util.List;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountDTO {
+public class StgAccountDTO {
 
-	private Long aId;
+	private Long accountId;
 
 	@Enumerated(EnumType.STRING)
 	private AccountStatus status;
@@ -37,6 +37,6 @@ public class AccountDTO {
 	private Date closingDate;
 
 	@JsonIgnore
-	private List<RelationshipDTO> relationshipDTOS;
+	private List<StgRelationshipDTO> stgRelationshipDTOS;
 
 }

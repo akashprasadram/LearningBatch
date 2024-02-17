@@ -1,19 +1,16 @@
 package com.bank.app.domain.runtime.entities;
 
-import java.util.Date;
-import java.util.List;
-
-import javax.persistence.*;
-import javax.validation.constraints.Min;
-
 import com.bank.app.util.AccountStatus;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "account")
@@ -25,7 +22,7 @@ public class Account {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "a_id")
-	private Long aId;
+	private Long accountId;
 
 	@Enumerated(EnumType.STRING)
 	private AccountStatus status;
