@@ -1,6 +1,6 @@
 package com.bank.app.api.staging.dto;
 
-import com.bank.app.domain.staging.entities.AccountStatus;
+import com.bank.app.util.AccountStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;

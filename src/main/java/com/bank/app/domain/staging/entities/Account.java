@@ -1,5 +1,6 @@
 package com.bank.app.domain.staging.entities;
 
+import com.bank.app.util.AccountStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;

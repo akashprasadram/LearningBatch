@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 
+import com.bank.app.util.AccountStatus;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
