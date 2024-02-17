@@ -1,6 +1,6 @@
 package com.bank.app.api.staging.dto;
 
-import com.bank.app.util.AccountType;
+import com.bank.app.domain.staging.entities.AccountType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

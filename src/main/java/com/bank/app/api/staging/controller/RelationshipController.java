@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class RelationshipController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RelationshipController.class);
+    private static final Logger LOGGER= LoggerFactory.getLogger(RelationshipController.class);
     private final RelationshipService relationshipService;
 
     private final RelationshipConverter relationshipConverter;
@@ -31,21 +31,21 @@ public class RelationshipController {
 
     @PostMapping("/relationship/")
     public ResponseEntity<RelationshipDTO> createRelationship(@RequestBody RelationshipDTO relationshipDTO) throws DataCreationError {
-        LOGGER.info("Inside createRelationship() with Relationship : {}", relationshipDTO);
-        Relationship relationship = relationshipConverter.relationshipConverter(relationshipDTO);
+        LOGGER.info("Inside createRelationship() with Relationship : {}",relationshipDTO);
+        Relationship relationship=relationshipConverter.relationshipConverter(relationshipDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(relationshipService.createRelationship(relationship));
     }
 
     @PostMapping("/relationships/")
     public ResponseEntity<List<RelationshipDTO>> createAllRelationship(@RequestBody List<RelationshipDTO> relationshipDTOs) throws DataCreationError {
-        LOGGER.info("Inside createAllRelationship() with Relationships : {}", relationshipDTOs);
-        List<Relationship> relationships = relationshipConverter.relationshipListConverter(relationshipDTOs);
+        LOGGER.info("Inside createAllRelationship() with Relationships : {}",relationshipDTOs);
+        List<Relationship> relationships=relationshipConverter.relationshipListConverter(relationshipDTOs);
         return ResponseEntity.status(HttpStatus.CREATED).body(relationshipService.createRelationships(relationships));
     }
 
     @GetMapping("/relationship/{id}")
     public ResponseEntity<RelationshipDTO> getRelationshipById(@PathVariable("id") Long id) throws DataNotFoundException {
-        LOGGER.info("Inside getRelationshipById() with Id : {}", id);
+        LOGGER.info("Inside getRelationshipById() with Id : {}",id);
         return ResponseEntity.ok(relationshipService.getRelationshipById(id));
     }
 
