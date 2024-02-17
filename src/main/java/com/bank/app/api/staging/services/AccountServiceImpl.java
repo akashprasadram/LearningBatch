@@ -4,13 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import com.bank.app.api.handler.staging.AccountConverter;
-import com.bank.app.api.staging.controller.RelationshipController;
 import com.bank.app.api.staging.dto.AccountDTO;
+import com.bank.app.domain.staging.entities.StgAccount;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.bank.app.domain.staging.entities.Account;
 import com.bank.app.domain.common.error.exceptions.DataCreationError;
 import com.bank.app.domain.common.error.exceptions.DataNotFoundException;
 import com.bank.app.domain.staging.repository.AccountRepo;
@@ -32,41 +31,41 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public List<AccountDTO> getAccounts() {
 		LOGGER.info("Inside getAccounts()");
-		List<Account> accounts = accountRepo.findAll();
-		return accountConverter.accountDTOListConverter(accounts);
+		List<StgAccount> stgAccounts = accountRepo.findAll();
+		return accountConverter.accountDTOListConverter(stgAccounts);
 	}
 
 	@Override
 	public AccountDTO getAccountById(Long id) throws DataNotFoundException {
 		LOGGER.info("Inside getAccountById() with id : {}",id);
-		Optional<Account> account = accountRepo.findById(id);
+		Optional<StgAccount> account = accountRepo.findById(id);
 		if(account.isEmpty()) {
 			throw new DataNotFoundException("Account data not found with Id : "+id);
 		}
 		else {
-			Account resultAccount = account.get();
-			return accountConverter.accountDTOConverter(resultAccount);
+			StgAccount resultStgAccount = account.get();
+			return accountConverter.accountDTOConverter(resultStgAccount);
 		}
 	}
 
 	@Override
-	public AccountDTO createAccount(Account account) throws DataCreationError{
-		LOGGER.info("Inside createAccount() with Account : {}",account);
-		Account savedAccount = accountRepo.save(account);
-		if(savedAccount.getAId()==0) {
+	public AccountDTO createAccount(StgAccount stgAccount) throws DataCreationError{
+		LOGGER.info("Inside createAccount() with Account : {}", stgAccount);
+		StgAccount savedStgAccount = accountRepo.save(stgAccount);
+		if(savedStgAccount.getAId()==0) {
 			throw new DataCreationError("Unable to create account");
 		}
-		return accountConverter.accountDTOConverter(savedAccount);
+		return accountConverter.accountDTOConverter(savedStgAccount);
 	}
 
 	@Override
-	public List<AccountDTO> createAccounts(List<Account> accounts) throws DataCreationError{
-		LOGGER.info("Inside createAccounts() with Accounts : {}",accounts);
-		List<Account> savedAccounts=accountRepo.saveAll(accounts);
-		if(savedAccounts.isEmpty()) {
+	public List<AccountDTO> createAccounts(List<StgAccount> stgAccounts) throws DataCreationError{
+		LOGGER.info("Inside createAccounts() with Accounts : {}", stgAccounts);
+		List<StgAccount> savedStgAccounts =accountRepo.saveAll(stgAccounts);
+		if(savedStgAccounts.isEmpty()) {
 			throw new DataCreationError("Unable to create accounts");
 		}
-		return accountConverter.accountDTOListConverter(savedAccounts);
+		return accountConverter.accountDTOListConverter(savedStgAccounts);
 	}
 
 }

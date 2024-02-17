@@ -19,9 +19,9 @@ import java.util.List;
 @AllArgsConstructor
 public class CustomerDTO {
 
-	private Long cId;
+	private Long custId;
 
-	private String cName;
+	private String custName;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "Asia/Kolkata")
