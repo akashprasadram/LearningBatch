@@ -11,7 +11,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class Relationship {
+public class StgRelationship {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,11 +19,11 @@ public class Relationship {
 	
 	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
-	private Customer customerId;
+	private StgCustomer stgCustomerId;
 
 	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id")
-	private Account accountId;
+	private StgAccount stgAccountId;
 	
 	@Enumerated(EnumType.STRING)
 	private AccountType type;

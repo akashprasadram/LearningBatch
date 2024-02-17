@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bank.app.domain.staging.entities.Account;
+import com.bank.app.domain.staging.entities.StgAccount;
 import com.bank.app.domain.common.error.exceptions.DataCreationError;
 import com.bank.app.domain.common.error.exceptions.DataNotFoundException;
 import com.bank.app.api.staging.services.AccountService;
@@ -51,15 +51,15 @@ public class AccountController {
 	@PostMapping("/accounts/")
 	public ResponseEntity<List<AccountDTO>> saveAllAccounts(@RequestBody List<AccountDTO> accountDTOs) throws DataCreationError{
 		LOGGER.info("Inside saveAllAccounts() with Accounts : {}",accountDTOs);
-		List<Account> accounts=accountConverter.accountListConverter(accountDTOs);
-		return ResponseEntity.status(HttpStatus.CREATED).body(accountService.createAccounts(accounts));
+		List<StgAccount> stgAccounts =accountConverter.accountListConverter(accountDTOs);
+		return ResponseEntity.status(HttpStatus.CREATED).body(accountService.createAccounts(stgAccounts));
 	}
 	
 	@PostMapping("/account/")
 	public ResponseEntity<AccountDTO> saveAccount(@RequestBody AccountDTO accountDTO) throws DataCreationError{
 		LOGGER.info("Inside saveAccount() with Account : {}",accountDTO);
-		Account account=accountConverter.accountConverter(accountDTO);
-		return ResponseEntity.status(HttpStatus.CREATED).body(accountService.createAccount(account));
+		StgAccount stgAccount =accountConverter.accountConverter(accountDTO);
+		return ResponseEntity.status(HttpStatus.CREATED).body(accountService.createAccount(stgAccount));
 	}
 	
 }

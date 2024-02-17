@@ -5,11 +5,11 @@ import java.util.Optional;
 
 import com.bank.app.api.handler.staging.CustomerConverter;
 import com.bank.app.api.staging.dto.CustomerDTO;
+import com.bank.app.domain.staging.entities.StgCustomer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.bank.app.domain.staging.entities.Customer;
 import com.bank.app.domain.common.error.exceptions.DataCreationError;
 import com.bank.app.domain.common.error.exceptions.DataNotFoundException;
 import com.bank.app.domain.staging.repository.CustomerRepo;
@@ -30,41 +30,41 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public List<CustomerDTO> getCustomers() {
 		LOGGER.info("Inside getCustomers()");
-		List<Customer> customers = customerRepo.findAll();
-		return customerConverter.customerDTOListConverter(customers);
+		List<StgCustomer> stgCustomers = customerRepo.findAll();
+		return customerConverter.customerDTOListConverter(stgCustomers);
 	}
 
 	@Override
 	public CustomerDTO getCustomerById(Long id) throws DataNotFoundException {
 
 		LOGGER.info("Inside getCustomerById() with id : {}",id);
-		Optional<Customer> customer = customerRepo.findById(id);
+		Optional<StgCustomer> customer = customerRepo.findById(id);
 		if(customer.isEmpty()) {
 			throw new DataNotFoundException("Customer not found with id : "+id);
 		}
-		Customer resultCustomer = customer.get();
+		StgCustomer resultStgCustomer = customer.get();
 
-		return customerConverter.customerDTOConverter(resultCustomer);
+		return customerConverter.customerDTOConverter(resultStgCustomer);
 	}
 
 	@Override
-	public CustomerDTO createCustomer(Customer customer) throws DataCreationError {
-		LOGGER.info("Inside createCustomer() with Customer : {}",customer);
-		Customer savedCustomer = customerRepo.save(customer);
-		if(savedCustomer.getCId()==0) {
+	public CustomerDTO createCustomer(StgCustomer stgCustomer) throws DataCreationError {
+		LOGGER.info("Inside createCustomer() with Customer : {}", stgCustomer);
+		StgCustomer savedStgCustomer = customerRepo.save(stgCustomer);
+		if(savedStgCustomer.getCustId()==0) {
 			throw new DataCreationError("Unable to create Customer");
 		}
-		return customerConverter.customerDTOConverter(savedCustomer);
+		return customerConverter.customerDTOConverter(savedStgCustomer);
 	}
 
 	@Override
-	public List<CustomerDTO> createCustomers(List<Customer> customers) throws DataCreationError {
-		LOGGER.info("Inside createCustomers() with Customers : {}",customers);
-		List<Customer> savedCustomers=customerRepo.saveAll(customers);
-		if(savedCustomers.isEmpty()) {
+	public List<CustomerDTO> createCustomers(List<StgCustomer> stgCustomers) throws DataCreationError {
+		LOGGER.info("Inside createCustomers() with Customers : {}", stgCustomers);
+		List<StgCustomer> savedStgCustomers =customerRepo.saveAll(stgCustomers);
+		if(savedStgCustomers.isEmpty()) {
 			throw new DataCreationError("Unable to create customers");
 		}
-		return customerConverter.customerDTOListConverter(savedCustomers);
+		return customerConverter.customerDTOListConverter(savedStgCustomers);
 	}
 
 }

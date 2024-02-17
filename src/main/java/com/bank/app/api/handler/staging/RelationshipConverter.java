@@ -3,9 +3,9 @@ package com.bank.app.api.handler.staging;
 import com.bank.app.api.staging.dto.AccountDTO;
 import com.bank.app.api.staging.dto.CustomerDTO;
 import com.bank.app.api.staging.dto.RelationshipDTO;
-import com.bank.app.domain.staging.entities.Account;
-import com.bank.app.domain.staging.entities.Customer;
-import com.bank.app.domain.staging.entities.Relationship;
+import com.bank.app.domain.staging.entities.StgAccount;
+import com.bank.app.domain.staging.entities.StgCustomer;
+import com.bank.app.domain.staging.entities.StgRelationship;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -26,38 +26,38 @@ public class RelationshipConverter {
         this.accountConverter = accountConverter;
     }
 
-    public RelationshipDTO relationshipDTOConverter(Relationship relationship){
+    public RelationshipDTO relationshipDTOConverter(StgRelationship stgRelationship){
         LOGGER.info("Inside relationshipDTOConverter()");
         RelationshipDTO relationshipDTO=new RelationshipDTO();
-        relationshipDTO.setId(relationship.getId());
-        CustomerDTO customerDTO=customerConverter.customerDTOConverter(relationship.getCustomerId());
+        relationshipDTO.setId(stgRelationship.getId());
+        CustomerDTO customerDTO=customerConverter.customerDTOConverter(stgRelationship.getStgCustomerId());
         relationshipDTO.setCustomerId(customerDTO);
-        AccountDTO accountDTO=accountConverter.accountDTOConverter(relationship.getAccountId());
+        AccountDTO accountDTO=accountConverter.accountDTOConverter(stgRelationship.getStgAccountId());
         relationshipDTO.setAccountId(accountDTO);
-        relationshipDTO.setType(relationship.getType());
+        relationshipDTO.setType(stgRelationship.getType());
 
         return relationshipDTO;
     }
 
-    public List<RelationshipDTO> relationshipListDTOConverter(List<Relationship> relationships){
+    public List<RelationshipDTO> relationshipListDTOConverter(List<StgRelationship> stgRelationships){
         LOGGER.info("Inside relationshipListDTOConverter()");
-        return relationships.stream().map(this::relationshipDTOConverter).toList();
+        return stgRelationships.stream().map(this::relationshipDTOConverter).toList();
     }
 
-    public Relationship relationshipConverter(RelationshipDTO relationshipDTO){
+    public StgRelationship relationshipConverter(RelationshipDTO relationshipDTO){
         LOGGER.info("Inside relationshipConverter()");
-        Relationship relationship=new Relationship();
-        relationship.setId(relationshipDTO.getId());
-        Customer customer=customerConverter.customerConverter(relationshipDTO.getCustomerId());
-        relationship.setCustomerId(customer);
-        Account account=accountConverter.accountConverter(relationshipDTO.getAccountId());
-        relationship.setAccountId(account);
-        relationship.setType(relationship.getType());
+        StgRelationship stgRelationship =new StgRelationship();
+        stgRelationship.setId(relationshipDTO.getId());
+        StgCustomer stgCustomer =customerConverter.customerConverter(relationshipDTO.getCustomerId());
+        stgRelationship.setStgCustomerId(stgCustomer);
+        StgAccount stgAccount =accountConverter.accountConverter(relationshipDTO.getAccountId());
+        stgRelationship.setStgAccountId(stgAccount);
+        stgRelationship.setType(stgRelationship.getType());
 
-        return relationship;
+        return stgRelationship;
     }
 
-    public List<Relationship> relationshipListConverter(List<RelationshipDTO> relationships){
+    public List<StgRelationship> relationshipListConverter(List<RelationshipDTO> relationships){
         LOGGER.info("Inside relationshipListConverter()");
         return relationships.stream().map(this::relationshipConverter).toList();
     }

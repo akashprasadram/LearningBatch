@@ -19,16 +19,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Setter
 @Getter
 @ToString
-public class Customer {
+public class StgCustomer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "c_id")
-	private Long cId;
+	private Long custId;
 
 	@Column(name = "c_name")
 	@Size(min = 2, max = 20)
-	private String cName;
+	private String custName;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "Asia/Kolkata")
@@ -37,7 +37,7 @@ public class Customer {
 
 	@OneToMany(mappedBy = "customerId")
 	@JsonIgnore
-	private List<Relationship> relationships;
+	private List<StgRelationship> stgRelationships;
 
 	@Size(min = 2, max = 50)
 	private String address;
