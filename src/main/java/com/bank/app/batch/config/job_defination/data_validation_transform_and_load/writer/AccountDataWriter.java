@@ -14,10 +14,10 @@ import org.springframework.stereotype.Component;
 public class AccountDataWriter {
 
     private static final Logger LOGGER= LoggerFactory.getLogger(AccountDataWriter.class);
-    @Qualifier("runtimeEntityManagerFactory")
+
     EntityManagerFactory runtimeEntityManagerFactory;
 
-    public AccountDataWriter(EntityManagerFactory runtimeEntityManagerFactory) {
+    public AccountDataWriter(@Qualifier("runtimeEntityManagerFactory") EntityManagerFactory runtimeEntityManagerFactory) {
         this.runtimeEntityManagerFactory = runtimeEntityManagerFactory;
     }
 

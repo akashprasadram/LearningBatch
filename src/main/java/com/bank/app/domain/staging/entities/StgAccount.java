@@ -17,7 +17,6 @@ import java.util.List;
 @Table(name = "account")
 @Getter
 @Setter
-@ToString
 public class StgAccount {
 
 	@Id
@@ -44,4 +43,13 @@ public class StgAccount {
 	@JsonIgnore
 	private List<StgRelationship> stgRelationships;
 
+	@Override
+	public String toString() {
+		return "StgAccount{" +
+				"accountId=" + accountId +
+				", status=" + status +
+				", openingDate=" + openingDate +
+				", closingDate=" + closingDate +
+				'}';
+	}
 }

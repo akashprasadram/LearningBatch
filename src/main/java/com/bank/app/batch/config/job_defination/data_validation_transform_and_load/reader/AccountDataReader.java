@@ -16,10 +16,10 @@ public class AccountDataReader {
 
     private static final Logger LOGGER= LoggerFactory.getLogger(AccountDataReader.class);
 
-    @Qualifier("stagingEntityManagerFactory")
+
     EntityManagerFactory stagingEntityManagerFactory;
 
-    public AccountDataReader(EntityManagerFactory stagingEntityManagerFactory) {
+    public AccountDataReader(@Qualifier("stagingEntityManagerFactory") EntityManagerFactory stagingEntityManagerFactory) {
         this.stagingEntityManagerFactory = stagingEntityManagerFactory;
     }
 
