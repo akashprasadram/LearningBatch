@@ -2,6 +2,7 @@ package com.bank.app.batch.config.job_defination.data_validation.step;
 
 import com.bank.app.domain.common.error.exceptions.StgCustomerValidationError;
 import com.bank.app.domain.staging.entities.StgCustomer;
+import com.bank.app.domain.staging.entities.StgRelationship;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.SkipListener;
@@ -11,49 +12,42 @@ import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
-import org.springframework.batch.item.file.FlatFileParseException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CustomerValidatorStep {
-    private static final Logger LOGGER= LoggerFactory.getLogger(CustomerValidatorStep.class);
-    private final ItemReader<StgCustomer> reader;
-    private final ItemProcessor<StgCustomer,StgCustomer> processor;
-    private final ItemWriter<StgCustomer> writer;
-
-    private final SkipListener<StgCustomer,StgCustomer> skipListener;
-
+public class RelationshipValidatorStep {
+    private static final Logger LOGGER= LoggerFactory.getLogger(RelationshipValidatorStep.class);
+    private final ItemReader<StgRelationship> reader;
+    private final ItemProcessor<StgRelationship,StgRelationship> processor;
+    private final ItemWriter<StgRelationship> writer;
 
     private final JpaTransactionManager stagingTransactionManager;
 
 
-    public CustomerValidatorStep(@Qualifier("stgCustomerReader") ItemReader<StgCustomer> reader
-            , @Qualifier("stgCustomerValidationProcess") ItemProcessor<StgCustomer, StgCustomer> processor
-            , @Qualifier("stgCustomerWriter") ItemWriter<StgCustomer> writer
-            , @Qualifier("customerValidationSkipListener") SkipListener<StgCustomer, StgCustomer> skipListener
+    public RelationshipValidatorStep(@Qualifier("stgRelationshipReader") ItemReader<StgRelationship> reader
+            , @Qualifier("stgRelationshipValidationProcess") ItemProcessor<StgRelationship, StgRelationship> processor
+            , @Qualifier("stgRelationshipWriter") ItemWriter<StgRelationship> writer
             , @Qualifier("stagingTransactionManager") JpaTransactionManager stagingTransactionManager) {
         this.reader = reader;
         this.processor = processor;
         this.writer = writer;
-        this.skipListener = skipListener;
         this.stagingTransactionManager = stagingTransactionManager;
     }
 
-    @Bean(name="stgCustomerValidatorStep")
-    public Step getCustomerValidatorStep(JobRepository jobRepository){
-        LOGGER.info("Inside getCustomerValidatorStep()");
-        return new StepBuilder("CustomerValidatorStep",jobRepository)
-                .<StgCustomer,StgCustomer>chunk(5,stagingTransactionManager)
+    @Bean(name="stgRelationshipValidatorStep")
+    public Step getRelationshipValidatorStep(JobRepository jobRepository){
+        LOGGER.info("Inside getRelationshipValidatorStep()");
+        return new StepBuilder("RelationshipValidatorStep",jobRepository)
+                .<StgRelationship,StgRelationship>chunk(5,stagingTransactionManager)
                 .reader(reader)
                 .processor(processor)
                 .writer(writer)
                 .faultTolerant()
                 .skip(StgCustomerValidationError.class)
                 .skipLimit(Integer.MAX_VALUE)
-                .listener(skipListener)
                 .build();
 
     }

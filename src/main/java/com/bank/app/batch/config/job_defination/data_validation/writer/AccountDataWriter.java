@@ -22,7 +22,7 @@ public class AccountDataWriter {
         this.stagingEntityManagerFactory = stagingEntityManagerFactory;
     }
 
-    @Bean(name="accountWriter")
+    @Bean(name="stgAccountWriter")
     JpaItemWriter<StgAccount> accountWriter(){
         LOGGER.info("Inside accountWriter()");
         return new JpaItemWriterBuilder<StgAccount>()

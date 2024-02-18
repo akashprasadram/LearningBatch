@@ -19,7 +19,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "customer")
 @Setter
 @Getter
-@ToString
 public class StgCustomer {
 
 	@Id
@@ -44,10 +43,21 @@ public class StgCustomer {
 	private List<StgRelationship> stgRelationships;
 
 	@Column(name = "validation_status", nullable = true)
+	@Enumerated(EnumType.STRING)
 	private ValidationStatus validationStatus;
 
 	@Column(name = "comment", nullable = true)
 	private String comment;
 
-
+	@Override
+	public String toString() {
+		return "StgCustomer{" +
+				"customerId=" + customerId +
+				", customerName='" + customerName + '\'' +
+				", dob=" + dob +
+				", address='" + address + '\'' +
+				", validationStatus=" + validationStatus +
+				", comment='" + comment + '\'' +
+				'}';
+	}
 }

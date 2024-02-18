@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component("stgCustomerValidationProcess")
@@ -46,7 +47,7 @@ public class StgCustomerValidationProcess implements ItemProcessor<StgCustomer, 
             LOGGER.info("Validation Error with Comment : {}" , comments);
             stgCustomer.setComment(comments.toString());
             stgCustomer.setValidationStatus(ValidationStatus.FAIL);
-            throw new StgCustomerValidationError("Customer validation failed with Errors : "+comments.toString());
+            //throw new StgCustomerValidationError("Customer validation failed with Errors : "+comments.toString());
         }
         else {
             stgCustomer.setValidationStatus(ValidationStatus.PASS);
@@ -61,20 +62,22 @@ public class StgCustomerValidationProcess implements ItemProcessor<StgCustomer, 
     }
 
     private void ageValidator(StgCustomer stgCustomer, List<String> comments) {
-        // Your DOB string in the specified format
-        String dobString = String.valueOf(stgCustomer.getDob());
 
-        // Define the date-time formatter
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LOGGER.info("Inside ageValidator() with Stg Customer : {}",stgCustomer);
 
-        // Parse the DOB string into a LocalDateTime object
-        LocalDateTime dobDateTime = LocalDateTime.parse(dobString, formatter);
+        Date dobString=stgCustomer.getDob();
+
+        // Parse the DOB string to LocalDate
+        LocalDate dob = LocalDate.parse(String.valueOf(dobString));
+        LOGGER.info("After converting age : {}",dob);
 
         // Get the current date
         LocalDate currentDate = LocalDate.now();
+        LOGGER.info("After currentDate : {}",currentDate);
+
 
         // Calculate the age
-        int age = calculateAge(dobDateTime.toLocalDate(), currentDate);
+        int age = calculateAge(dob, currentDate);
 
         // Check if the age is 18 or more
         if (age < 18) {

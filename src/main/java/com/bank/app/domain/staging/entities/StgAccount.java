@@ -46,6 +46,7 @@ public class StgAccount {
 	private List<StgRelationship> stgRelationships;
 
 	@Column(name = "validation_status", nullable = true)
+	@Enumerated(EnumType.STRING)
 	private ValidationStatus validationStatus;
 
 	@Column(name = "comment", nullable = true)

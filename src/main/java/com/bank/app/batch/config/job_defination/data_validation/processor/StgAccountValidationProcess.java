@@ -32,6 +32,7 @@ public class StgAccountValidationProcess implements ItemProcessor<StgAccount, St
     public StgAccount process(@NonNull StgAccount stgAccount) throws Exception {
         LOGGER.info("Inside AccountValidationProcess.process() with Stg Account : {}",stgAccount);
         validateAccount(stgAccount);
+        LOGGER.info("After Validation Stg Account : {}",stgAccount);
         return stgAccount;
     }
     public synchronized void validateAccount(StgAccount stgAccount) throws StgAccountValidationError {
@@ -45,7 +46,7 @@ public class StgAccountValidationProcess implements ItemProcessor<StgAccount, St
             LOGGER.info("Validation Error with Comment : {}" , comments);
             stgAccount.setComment(comments.toString());
             stgAccount.setValidationStatus(ValidationStatus.FAIL);
-            throw new StgAccountValidationError("Account validation failed with Errors : "+comments.toString());
+            //throw new StgAccountValidationError("Account validation failed with Errors : "+comments.toString());
         }
         else {
             stgAccount.setValidationStatus(ValidationStatus.PASS);

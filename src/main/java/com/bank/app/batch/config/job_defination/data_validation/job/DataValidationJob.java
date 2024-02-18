@@ -18,10 +18,14 @@ public class DataValidationJob {
 
     private final Step customerValidatorStep;
 
+    private final Step relationshipValidatorStep;
+
     public DataValidationJob(@Qualifier("stgAccountValidatorStep") Step accountValidatorStep,
-                             @Qualifier("stgCustomerValidatorStep") Step  customerValidatorStep) {
+                             @Qualifier("stgCustomerValidatorStep") Step  customerValidatorStep,
+                             @Qualifier("stgRelationshipValidatorStep") Step relationshipValidatorStep) {
         this.accountValidatorStep = accountValidatorStep;
         this.customerValidatorStep = customerValidatorStep;
+        this.relationshipValidatorStep = relationshipValidatorStep;
     }
 
     @Bean(name="dataValidationJobBean")
@@ -31,6 +35,7 @@ public class DataValidationJob {
                 .incrementer(new RunIdIncrementer())
                 .flow(accountValidatorStep)
                 .next(customerValidatorStep)
+                .next(relationshipValidatorStep)
                 .end()
                 .build();
     }
