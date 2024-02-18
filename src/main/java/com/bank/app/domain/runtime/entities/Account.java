@@ -1,6 +1,7 @@
 package com.bank.app.domain.runtime.entities;
 
 import com.bank.app.util.AccountStatus;
+import com.bank.app.util.ValidationStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
@@ -42,5 +43,6 @@ public class Account {
 	@OneToMany(mappedBy = "accountId")
 	@JsonIgnore
 	private List<Relationship> relationships;
+
 
 }

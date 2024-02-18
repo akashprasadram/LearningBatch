@@ -1,6 +1,7 @@
 package com.bank.app.api.staging.dto;
 
 import com.bank.app.util.AccountType;
+import com.bank.app.util.ValidationStatus;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.Getter;
@@ -22,4 +23,5 @@ public class StgRelationshipDTO {
 
 	@Enumerated(EnumType.STRING)
 	private AccountType type;
+
 }

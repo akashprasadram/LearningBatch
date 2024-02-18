@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.bank.app.domain.common.error.exceptions.DataCreationError;
+import com.bank.app.domain.common.error.exceptions.DataIngestionError;
 import com.bank.app.domain.common.error.exceptions.DataNotFoundException;
 import com.bank.app.domain.staging.repository.StgRelationshipRepo;
 
@@ -47,21 +47,21 @@ public class StgRelationshipServiceImpl implements StgRelationshipService {
 	}
 
 	@Override
-	public StgRelationshipDTO createRelationship(StgRelationship stgRelationship) throws DataCreationError {
+	public StgRelationshipDTO createRelationship(StgRelationship stgRelationship) throws DataIngestionError {
 		LOGGER.info("Inside createRelationship() with StgRelationship : {}",stgRelationship);
 		StgRelationship savedStgRelationship = stgRelationshipRepo.save(stgRelationship);
 		if(savedStgRelationship.getId()==0) {
-			throw new DataCreationError("Unable to create relationship");
+			throw new DataIngestionError("Unable to create relationship");
 		}
 		return stgRelationshipConverter.relationshipDTOConverter(savedStgRelationship);
 	}
 
 	@Override
-	public List<StgRelationshipDTO> createRelationships(List<StgRelationship> stgRelationships) throws DataCreationError {
+	public List<StgRelationshipDTO> createRelationships(List<StgRelationship> stgRelationships) throws DataIngestionError {
 		LOGGER.info("Inside createRelationship() with stgRelationships : {}",stgRelationships);
 		List<StgRelationship> savedStgRelationships = stgRelationshipRepo.saveAll(stgRelationships);
 		if(savedStgRelationships.isEmpty()) {
-			throw new DataCreationError("Unable to create relationships");
+			throw new DataIngestionError("Unable to create relationships");
 		}
 		return stgRelationshipConverter.relationshipListDTOConverter(savedStgRelationships);
 	}

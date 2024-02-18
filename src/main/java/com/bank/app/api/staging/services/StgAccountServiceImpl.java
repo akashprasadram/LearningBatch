@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.bank.app.domain.common.error.exceptions.DataCreationError;
+import com.bank.app.domain.common.error.exceptions.DataIngestionError;
 import com.bank.app.domain.common.error.exceptions.DataNotFoundException;
 import com.bank.app.domain.staging.repository.StgAccountRepo;
 
@@ -49,21 +49,21 @@ public class StgAccountServiceImpl implements StgAccountService {
 	}
 
 	@Override
-	public StgAccountDTO createAccount(StgAccount stgAccount) throws DataCreationError{
+	public StgAccountDTO createAccount(StgAccount stgAccount) throws DataIngestionError {
 		LOGGER.info("Inside createAccount() with StgAccount : {}", stgAccount);
 		StgAccount savedStgAccount = stgAccountRepo.save(stgAccount);
 		if(savedStgAccount.getAccountId()==0) {
-			throw new DataCreationError("Unable to create account");
+			throw new DataIngestionError("Unable to create account");
 		}
 		return stgAccountConverter.accountDTOConverter(savedStgAccount);
 	}
 
 	@Override
-	public List<StgAccountDTO> createAccounts(List<StgAccount> stgAccounts) throws DataCreationError{
+	public List<StgAccountDTO> createAccounts(List<StgAccount> stgAccounts) throws DataIngestionError {
 		LOGGER.info("Inside createAccounts() with StgAccounts : {}", stgAccounts);
 		List<StgAccount> savedStgAccounts = stgAccountRepo.saveAll(stgAccounts);
 		if(savedStgAccounts.isEmpty()) {
-			throw new DataCreationError("Unable to create accounts");
+			throw new DataIngestionError("Unable to create accounts");
 		}
 		return stgAccountConverter.accountDTOListConverter(savedStgAccounts);
 	}

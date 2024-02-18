@@ -1,4 +1,4 @@
-package com.bank.app.batch.config.job_defination.data_validation_transform_and_load.reader;
+package com.bank.app.batch.config.job_defination.data_validation.reader;
 
 
 import org.springframework.stereotype.Component;

@@ -1,5 +1,6 @@
 package com.bank.app.api.staging.dto;
 
+import com.bank.app.util.ValidationStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Temporal;
@@ -15,8 +16,6 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
 public class StgCustomerDTO {
 
 	private Long customerId;

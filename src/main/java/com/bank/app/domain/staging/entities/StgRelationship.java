@@ -1,6 +1,7 @@
 package com.bank.app.domain.staging.entities;
 
 import com.bank.app.util.AccountType;
+import com.bank.app.util.ValidationStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,4 +28,10 @@ public class StgRelationship {
 	
 	@Enumerated(EnumType.STRING)
 	private AccountType type;
+
+	@Column(name = "validation_status", nullable = true)
+	private ValidationStatus validationStatus;
+
+	@Column(name = "comment", nullable = true)
+	private String comment;
 }
