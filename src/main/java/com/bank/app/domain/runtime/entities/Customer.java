@@ -19,13 +19,13 @@ import java.util.List;
 public class Customer {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "c_id")
-	private Long cId;
+	private Long customerId;
 
 	@Column(name = "c_name")
 	@Size(min = 2, max = 20)
-	private String cName;
+	private String customerName;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)

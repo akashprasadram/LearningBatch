@@ -1,4 +1,4 @@
-package com.bank.app.batch.config.job_defination.data_validation.reader;
+package com.bank.app.batch.config.job_defination.dataload.reader;
 
 import com.bank.app.domain.staging.entities.StgAccount;
 import jakarta.persistence.EntityManagerFactory;
@@ -24,13 +24,13 @@ public class AccountDataReader {
     }
 
 
-    @Bean(name = "stgAccountReader")
-    JpaCursorItemReader<StgAccount> stgAccountReader() {
-        LOGGER.info("Inside stgAccountReader()");
+    @Bean(name = "accountReader")
+    JpaCursorItemReader<StgAccount> accountReader() {
+        LOGGER.info("Inside AccountDataReader.accountReader()");
         return new JpaCursorItemReaderBuilder<StgAccount>()
-                .name("stgAccountReader")
+                .name("accountReader")
                 .entityManagerFactory(stagingEntityManagerFactory)
-                .queryString("Select s From StgAccount s")
+                .queryString("SELECT s FROM StgAccount s WHERE s.validationStatus=ValidationStatus.NONE")
                 .build();
     }
 }

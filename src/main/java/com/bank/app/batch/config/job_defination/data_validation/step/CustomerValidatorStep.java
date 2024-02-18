@@ -31,7 +31,7 @@ public class CustomerValidatorStep {
 
 
     public CustomerValidatorStep(@Qualifier("stgCustomerReader") ItemReader<StgCustomer> reader
-            , @Qualifier("stgCustomerValidationProcess") ItemProcessor<StgCustomer, StgCustomer> processor
+            , @Qualifier("stgCustomerValidationProcessor") ItemProcessor<StgCustomer, StgCustomer> processor
             , @Qualifier("stgCustomerWriter") ItemWriter<StgCustomer> writer
             , @Qualifier("customerValidationSkipListener") SkipListener<StgCustomer, StgCustomer> skipListener
             , @Qualifier("stagingTransactionManager") JpaTransactionManager stagingTransactionManager) {

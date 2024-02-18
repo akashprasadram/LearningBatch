@@ -12,19 +12,17 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Component("stgCustomerValidationProcess")
-public class StgCustomerValidationProcess implements ItemProcessor<StgCustomer, StgCustomer> {
+@Component("stgCustomerValidationProcessor")
+public class StgCustomerValidationProcessor implements ItemProcessor<StgCustomer, StgCustomer> {
 
-    private static final Logger LOGGER= LoggerFactory.getLogger(StgCustomerValidationProcess.class);
+    private static final Logger LOGGER= LoggerFactory.getLogger(StgCustomerValidationProcessor.class);
     private final StgRelationshipRepo stgRelationshipRepo;
 
-    public StgCustomerValidationProcess(StgRelationshipRepo stgRelationshipRepo) {
+    public StgCustomerValidationProcessor(StgRelationshipRepo stgRelationshipRepo) {
         this.stgRelationshipRepo = stgRelationshipRepo;
     }
 

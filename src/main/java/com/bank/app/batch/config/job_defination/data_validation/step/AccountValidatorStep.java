@@ -1,7 +1,6 @@
 package com.bank.app.batch.config.job_defination.data_validation.step;
 
 import com.bank.app.domain.common.error.exceptions.StgAccountValidationError;
-import com.bank.app.domain.common.error.exceptions.StgCustomerValidationError;
 import com.bank.app.domain.staging.entities.StgAccount;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +10,6 @@ import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
-import org.springframework.batch.item.file.FlatFileParseException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -30,7 +28,7 @@ public class AccountValidatorStep {
 
 
     public AccountValidatorStep(@Qualifier("stgAccountReader") ItemReader<StgAccount> reader
-            , @Qualifier("stgAccountValidationProcess") ItemProcessor<StgAccount, StgAccount> processor
+            , @Qualifier("stgAccountValidationProcessor") ItemProcessor<StgAccount, StgAccount> processor
             , @Qualifier("stgAccountWriter") ItemWriter<StgAccount> writer
             , @Qualifier("stagingTransactionManager") JpaTransactionManager stagingTransactionManager) {
         this.reader = reader;

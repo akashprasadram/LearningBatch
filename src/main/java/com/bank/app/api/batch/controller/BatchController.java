@@ -6,6 +6,8 @@ import com.bank.app.domain.common.error.exceptions.JobStartException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.launch.JobOperator;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,5 +44,14 @@ public class BatchController {
         }
         return "Job Stopped...";
 
+    }
+
+
+    @Async
+    @Scheduled(cron = "0 56 16 1/1 * ?", zone = "Asia/Kolkata")
+    public void startScheduledJob() throws InvalidJobNameException, JobStartException {
+        LOGGER.info("Inside startScheduledJob()");
+        jobService.startScheduledJob("dataValidationTransformAndLoadJob");
+        jobService.startScheduledJob("dataLoadJob");
     }
 }

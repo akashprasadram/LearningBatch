@@ -1,6 +1,5 @@
-package com.bank.app.batch.config.job_defination.data_validation.reader;
+package com.bank.app.batch.config.job_defination.dataload.reader;
 
-import com.bank.app.domain.staging.entities.StgAccount;
 import com.bank.app.domain.staging.entities.StgCustomer;
 import jakarta.persistence.EntityManagerFactory;
 import org.slf4j.Logger;
@@ -11,26 +10,27 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class CustomerDataReader {
 
     private static final Logger LOGGER= LoggerFactory.getLogger(CustomerDataReader.class);
 
 
-    EntityManagerFactory stagingEntityManagerFactory;
+    private final EntityManagerFactory stagingEntityManagerFactory;
 
     public CustomerDataReader(@Qualifier("stagingEntityManagerFactory") EntityManagerFactory stagingEntityManagerFactory) {
         this.stagingEntityManagerFactory = stagingEntityManagerFactory;
     }
 
 
-    @Bean(name = "stgCustomerReader")
-    JpaCursorItemReader<StgCustomer> stgCustomerReader() {
-        LOGGER.info("Inside stgCustomerReader()");
+    @Bean(name = "customerReader")
+    JpaCursorItemReader<StgCustomer> customerReader() {
+        LOGGER.info("Inside CustomerDataReader.customerReader()");
         return new JpaCursorItemReaderBuilder<StgCustomer>()
-                .name("stgCustomerReader")
+                .name("customerReader")
                 .entityManagerFactory(stagingEntityManagerFactory)
-                .queryString("From StgCustomer")
+                .queryString("SELECT c FROM StgCustomer c WHERE c.validationStatus=ValidationStatus.NONE")
                 .build();
     }
 }

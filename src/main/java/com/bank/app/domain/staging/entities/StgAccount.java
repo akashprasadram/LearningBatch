@@ -47,7 +47,7 @@ public class StgAccount {
 
 	@Column(name = "validation_status", nullable = true)
 	@Enumerated(EnumType.STRING)
-	private ValidationStatus validationStatus;
+	private ValidationStatus validationStatus=ValidationStatus.NONE;
 
 	@Column(name = "comment", nullable = true)
 	@Size(max=500)

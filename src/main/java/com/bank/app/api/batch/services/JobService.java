@@ -1,21 +1,16 @@
 package com.bank.app.api.batch.services;
 
-import com.bank.app.api.staging.controller.StgAccountController;
 import com.bank.app.domain.common.error.exceptions.InvalidJobNameException;
 import com.bank.app.domain.common.error.exceptions.JobStartException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.*;
 import org.springframework.batch.core.launch.JobLauncher;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class JobService {
@@ -24,10 +19,14 @@ public class JobService {
     private final JobLauncher jobLauncher;
 
     private final Job dataValidationTransformAndLoadJob;
+    private final Job dataLoadJob;
 
-    public JobService(JobLauncher jobLauncher,@Qualifier("dataValidationJobBean") Job dataValidationTransformAndLoadJob) {
+    public JobService(JobLauncher jobLauncher
+            , @Qualifier("dataValidationJobBean") Job dataValidationTransformAndLoadJob
+            ,@Qualifier("dataLoadJobBean") Job dataLoadJob) {
         this.jobLauncher = jobLauncher;
         this.dataValidationTransformAndLoadJob = dataValidationTransformAndLoadJob;
+        this.dataLoadJob = dataLoadJob;
     }
 
     @Async
@@ -47,7 +46,49 @@ public class JobService {
                 throw new JobStartException("Unable to start the Job with name : "+jobName);
 
             }
-        }else{
+        }
+        else if(jobName.equals("dataLoadJob")){
+            try {
+                jobLauncher.run(dataLoadJob, jobParameters);
+            } catch (Exception ex) {
+                LOGGER.info("Exception while starting Job {}", ex.getMessage());
+                throw new JobStartException("Unable to start the Job with name : "+jobName);
+
+            }
+        }
+        else{
+            throw new InvalidJobNameException("Job not found with name : "+jobName);
+        }
+
+    }
+
+    public void startScheduledJob(String jobName) throws InvalidJobNameException, JobStartException {
+
+        LOGGER.info("Inside startScheduledJob() with Job Name : {}",jobName);
+        JobParametersBuilder jobParametersBuilder = new JobParametersBuilder();
+        jobParametersBuilder.addDate("currentTime", new Date());
+
+        JobParameters jobParameters = jobParametersBuilder.toJobParameters();
+
+        if (jobName.equals("dataValidationTransformAndLoadJob")) {
+            try {
+                jobLauncher.run(dataValidationTransformAndLoadJob, jobParameters);
+            } catch (Exception ex) {
+                LOGGER.info("Exception while starting Job {}", ex.getMessage());
+                throw new JobStartException("Unable to start the Job with name : "+jobName);
+
+            }
+        }
+        else if(jobName.equals("dataLoadJob")){
+            try {
+                jobLauncher.run(dataLoadJob, jobParameters);
+            } catch (Exception ex) {
+                LOGGER.info("Exception while starting Job {}", ex.getMessage());
+                throw new JobStartException("Unable to start the Job with name : "+jobName);
+
+            }
+        }
+        else{
             throw new InvalidJobNameException("Job not found with name : "+jobName);
         }
 

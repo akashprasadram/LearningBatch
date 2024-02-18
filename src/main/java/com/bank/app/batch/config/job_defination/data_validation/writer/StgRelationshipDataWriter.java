@@ -1,6 +1,5 @@
 package com.bank.app.batch.config.job_defination.data_validation.writer;
 
-import com.bank.app.domain.staging.entities.StgCustomer;
 import com.bank.app.domain.staging.entities.StgRelationship;
 import jakarta.persistence.EntityManagerFactory;
 import org.slf4j.Logger;
@@ -12,12 +11,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RelationshipDataWriter {
-    private static final Logger LOGGER= LoggerFactory.getLogger(RelationshipDataWriter.class);
+public class StgRelationshipDataWriter {
+    private static final Logger LOGGER= LoggerFactory.getLogger(StgRelationshipDataWriter.class);
 
     private final EntityManagerFactory stagingEntityManagerFactory;
 
-    public RelationshipDataWriter(@Qualifier("stagingEntityManagerFactory") EntityManagerFactory stagingEntityManagerFactory) {
+    public StgRelationshipDataWriter(@Qualifier("stagingEntityManagerFactory") EntityManagerFactory stagingEntityManagerFactory) {
         this.stagingEntityManagerFactory = stagingEntityManagerFactory;
     }
 

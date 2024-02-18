@@ -1,11 +1,9 @@
 package com.bank.app.batch.config.job_defination.data_validation.step;
 
 import com.bank.app.domain.common.error.exceptions.StgCustomerValidationError;
-import com.bank.app.domain.staging.entities.StgCustomer;
 import com.bank.app.domain.staging.entities.StgRelationship;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.batch.core.SkipListener;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
@@ -28,7 +26,7 @@ public class RelationshipValidatorStep {
 
 
     public RelationshipValidatorStep(@Qualifier("stgRelationshipReader") ItemReader<StgRelationship> reader
-            , @Qualifier("stgRelationshipValidationProcess") ItemProcessor<StgRelationship, StgRelationship> processor
+            , @Qualifier("stgRelationshipValidationProcessor") ItemProcessor<StgRelationship, StgRelationship> processor
             , @Qualifier("stgRelationshipWriter") ItemWriter<StgRelationship> writer
             , @Qualifier("stagingTransactionManager") JpaTransactionManager stagingTransactionManager) {
         this.reader = reader;

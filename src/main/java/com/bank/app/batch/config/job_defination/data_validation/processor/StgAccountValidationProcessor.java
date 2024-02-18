@@ -16,14 +16,14 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component("stgAccountValidationProcess")
-public class StgAccountValidationProcess implements ItemProcessor<StgAccount, StgAccount> {
+@Component("stgAccountValidationProcessor")
+public class StgAccountValidationProcessor implements ItemProcessor<StgAccount, StgAccount> {
 
-    private static final Logger LOGGER= LoggerFactory.getLogger(StgAccountValidationProcess.class);
+    private static final Logger LOGGER= LoggerFactory.getLogger(StgAccountValidationProcessor.class);
 
     private final StgRelationshipRepo stgRelationshipRepo;
 
-    public StgAccountValidationProcess(StgRelationshipRepo stgRelationshipRepo) {
+    public StgAccountValidationProcessor(StgRelationshipRepo stgRelationshipRepo) {
         this.stgRelationshipRepo = stgRelationshipRepo;
     }
 
