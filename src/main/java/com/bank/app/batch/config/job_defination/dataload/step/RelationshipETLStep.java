@@ -1,9 +1,7 @@
 package com.bank.app.batch.config.job_defination.dataload.step;
 
 import com.bank.app.domain.common.error.exceptions.RelationshipLoadError;
-import com.bank.app.domain.runtime.entities.Customer;
 import com.bank.app.domain.runtime.entities.Relationship;
-import com.bank.app.domain.staging.entities.StgCustomer;
 import com.bank.app.domain.staging.entities.StgRelationship;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

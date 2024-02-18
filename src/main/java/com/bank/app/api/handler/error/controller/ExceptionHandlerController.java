@@ -1,10 +1,10 @@
 package com.bank.app.api.handler.error.controller;
 
+import com.bank.app.api.handler.error.model.StatusResponse;
 import com.bank.app.domain.common.error.exceptions.DataIngestionError;
 import com.bank.app.domain.common.error.exceptions.DataNotFoundException;
 import com.bank.app.domain.common.error.exceptions.InvalidJobNameException;
 import com.bank.app.domain.common.error.exceptions.JobStartException;
-import com.bank.app.api.handler.error.model.StatusResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -55,7 +55,7 @@ public class ExceptionHandlerController {
     @ExceptionHandler(JobStartException.class)
     public ResponseEntity<StatusResponse> jobStartException(Exception e) {
 
-        LOGGER.error("Inside InvalidJobNameException() with Error : {}",e.getMessage());
+        LOGGER.error("Inside jobStartException() with Error : {}",e.getMessage());
         // Handle the exception globally
         StatusResponse statusResponse=new StatusResponse();
         statusResponse.setStatus(HttpStatus.NOT_FOUND);

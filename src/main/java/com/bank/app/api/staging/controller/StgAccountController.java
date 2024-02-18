@@ -1,24 +1,18 @@
 package com.bank.app.api.staging.controller;
 
-import java.util.List;
-
 import com.bank.app.api.handler.staging.StgAccountConverter;
 import com.bank.app.api.staging.dto.StgAccountDTO;
+import com.bank.app.api.staging.services.StgAccountService;
+import com.bank.app.domain.common.error.exceptions.DataIngestionError;
+import com.bank.app.domain.common.error.exceptions.DataNotFoundException;
+import com.bank.app.domain.staging.entities.StgAccount;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.bank.app.domain.staging.entities.StgAccount;
-import com.bank.app.domain.common.error.exceptions.DataIngestionError;
-import com.bank.app.domain.common.error.exceptions.DataNotFoundException;
-import com.bank.app.api.staging.services.StgAccountService;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")

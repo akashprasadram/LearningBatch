@@ -1,6 +1,5 @@
 package com.bank.app.batch.config.job_defination.dataload.step;
 
-import com.bank.app.domain.common.error.exceptions.StgAccountValidationError;
 import com.bank.app.domain.runtime.entities.Account;
 import com.bank.app.domain.staging.entities.StgAccount;
 import org.slf4j.Logger;

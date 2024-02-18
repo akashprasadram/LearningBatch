@@ -16,16 +16,16 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
-public class stgCustomerController {
+public class StgCustomerController {
 
-    private static final Logger LOGGER= LoggerFactory.getLogger(stgCustomerController.class);
+    private static final Logger LOGGER= LoggerFactory.getLogger(StgCustomerController.class);
 
     private final StgCustomerService stgCustomerService;
 
     private final StgCustomerConverter stgCustomerConverter;
 
 
-    public stgCustomerController(StgCustomerService stgCustomerService, StgCustomerConverter stgCustomerConverter) {
+    public StgCustomerController(StgCustomerService stgCustomerService, StgCustomerConverter stgCustomerConverter) {
         this.stgCustomerService = stgCustomerService;
         this.stgCustomerConverter = stgCustomerConverter;
     }

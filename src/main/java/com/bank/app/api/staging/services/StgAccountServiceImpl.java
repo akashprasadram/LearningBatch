@@ -1,18 +1,17 @@
 package com.bank.app.api.staging.services;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.bank.app.api.handler.staging.StgAccountConverter;
 import com.bank.app.api.staging.dto.StgAccountDTO;
+import com.bank.app.domain.common.error.exceptions.DataIngestionError;
+import com.bank.app.domain.common.error.exceptions.DataNotFoundException;
 import com.bank.app.domain.staging.entities.StgAccount;
+import com.bank.app.domain.staging.repository.StgAccountRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.bank.app.domain.common.error.exceptions.DataIngestionError;
-import com.bank.app.domain.common.error.exceptions.DataNotFoundException;
-import com.bank.app.domain.staging.repository.StgAccountRepo;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StgAccountServiceImpl implements StgAccountService {

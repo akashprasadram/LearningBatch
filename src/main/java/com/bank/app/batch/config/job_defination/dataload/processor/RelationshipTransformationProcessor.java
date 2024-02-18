@@ -6,7 +6,6 @@ import com.bank.app.domain.runtime.entities.Customer;
 import com.bank.app.domain.runtime.entities.Relationship;
 import com.bank.app.domain.runtime.repository.AccountRepo;
 import com.bank.app.domain.runtime.repository.CustomerRepo;
-import com.bank.app.domain.staging.entities.StgCustomer;
 import com.bank.app.domain.staging.entities.StgRelationship;
 import com.bank.app.domain.staging.repository.StgRelationshipRepo;
 import com.bank.app.util.ValidationStatus;

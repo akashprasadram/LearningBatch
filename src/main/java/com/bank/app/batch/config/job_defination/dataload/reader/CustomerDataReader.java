@@ -30,7 +30,7 @@ public class CustomerDataReader {
         return new JpaCursorItemReaderBuilder<StgCustomer>()
                 .name("customerReader")
                 .entityManagerFactory(stagingEntityManagerFactory)
-                .queryString("SELECT c FROM StgCustomer c WHERE c.validationStatus=ValidationStatus.NONE")
+                .queryString("SELECT c FROM StgCustomer c WHERE c.validationStatus=ValidationStatus.PASS")
                 .build();
     }
 }

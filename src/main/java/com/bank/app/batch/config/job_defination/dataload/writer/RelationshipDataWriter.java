@@ -1,6 +1,5 @@
 package com.bank.app.batch.config.job_defination.dataload.writer;
 
-import com.bank.app.domain.runtime.entities.Account;
 import com.bank.app.domain.runtime.entities.Relationship;
 import jakarta.persistence.EntityManagerFactory;
 import org.slf4j.Logger;

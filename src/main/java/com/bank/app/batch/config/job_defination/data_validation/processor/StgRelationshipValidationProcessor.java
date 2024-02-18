@@ -1,6 +1,5 @@
 package com.bank.app.batch.config.job_defination.data_validation.processor;
 
-import com.bank.app.domain.common.error.exceptions.StgRelationshipValidationError;
 import com.bank.app.domain.staging.entities.StgAccount;
 import com.bank.app.domain.staging.entities.StgCustomer;
 import com.bank.app.domain.staging.entities.StgRelationship;
@@ -36,7 +35,7 @@ public class StgRelationshipValidationProcessor implements ItemProcessor<StgRela
         return stgRelationship;
     }
 
-    public void validateRelationship(StgRelationship stgRelationship) throws StgRelationshipValidationError {
+    public void validateRelationship(StgRelationship stgRelationship) {
         LOGGER.info("Inside validateRelationship() with Stg Relationship : {}",stgRelationship);
 
         List<String> comments=new ArrayList<>();
@@ -58,7 +57,6 @@ public class StgRelationshipValidationProcessor implements ItemProcessor<StgRela
             stgCustomerRepo.save(customer);
             stgRelationship.setComment(comments.toString());
             stgRelationship.setValidationStatus(ValidationStatus.FAIL);
-            //throw new StgRelationshipValidationError("Relationship validation failed with Errors : "+comments.toString());
         }
         else {
             stgRelationship.setValidationStatus(ValidationStatus.PASS);

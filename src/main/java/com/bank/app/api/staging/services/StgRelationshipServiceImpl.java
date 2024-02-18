@@ -1,18 +1,17 @@
 package com.bank.app.api.staging.services;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.bank.app.api.handler.staging.StgRelationshipConverter;
 import com.bank.app.api.staging.dto.StgRelationshipDTO;
+import com.bank.app.domain.common.error.exceptions.DataIngestionError;
+import com.bank.app.domain.common.error.exceptions.DataNotFoundException;
 import com.bank.app.domain.staging.entities.StgRelationship;
+import com.bank.app.domain.staging.repository.StgRelationshipRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.bank.app.domain.common.error.exceptions.DataIngestionError;
-import com.bank.app.domain.common.error.exceptions.DataNotFoundException;
-import com.bank.app.domain.staging.repository.StgRelationshipRepo;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StgRelationshipServiceImpl implements StgRelationshipService {

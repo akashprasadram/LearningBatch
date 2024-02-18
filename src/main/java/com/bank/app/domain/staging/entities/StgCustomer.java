@@ -1,19 +1,16 @@
 package com.bank.app.domain.staging.entities;
 
-import java.util.Date;
-import java.util.List;
-
-
 import com.bank.app.util.ValidationStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "customer")

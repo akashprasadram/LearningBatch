@@ -30,7 +30,8 @@ public class StgAccountDataReader {
         return new JpaCursorItemReaderBuilder<StgAccount>()
                 .name("stgAccountReader")
                 .entityManagerFactory(stagingEntityManagerFactory)
-                .queryString("SELECT acc From StgAccount acc WHERE acc.validationStatus=ValidationStatus.NULL")
+                .queryString("SELECT acc From StgAccount acc WHERE acc.validationStatus=ValidationStatus.NONE")
+                //.queryString("SELECT acc From StgAccount acc")
                 .build();
     }
 }

@@ -30,7 +30,7 @@ public class RelationshipDataReader {
         return new JpaCursorItemReaderBuilder<StgRelationship>()
                 .name("relationshipReader")
                 .entityManagerFactory(stagingEntityManagerFactory)
-                .queryString("SELECT r FROM StgRelationship r WHERE r.validationStatus=ValidationStatus.NONE")
+                .queryString("SELECT r FROM StgRelationship r WHERE r.validationStatus=ValidationStatus.PASS")
                 .build();
     }
 }

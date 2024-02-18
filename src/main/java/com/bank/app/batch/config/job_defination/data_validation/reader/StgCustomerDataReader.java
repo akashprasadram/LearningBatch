@@ -29,7 +29,8 @@ public class StgCustomerDataReader {
         return new JpaCursorItemReaderBuilder<StgCustomer>()
                 .name("stgCustomerReader")
                 .entityManagerFactory(stagingEntityManagerFactory)
-                .queryString("SELECT c FROM StgCustomer c WHERE c.validationStatus=ValidationStatus.NULL")
+                .queryString("SELECT c FROM StgCustomer c WHERE c.validationStatus=ValidationStatus.NONE")
+                //.queryString("SELECT c FROM StgCustomer c")
                 .build();
     }
 }

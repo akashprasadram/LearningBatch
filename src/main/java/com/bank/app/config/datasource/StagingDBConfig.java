@@ -1,8 +1,5 @@
 package com.bank.app.config.datasource;
 
-import java.util.Properties;
-import javax.sql.DataSource;
-
 import jakarta.persistence.EntityManagerFactory;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -14,6 +11,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+
+import javax.sql.DataSource;
+import java.util.Properties;
 
 @Configuration
 @EnableJpaRepositories(basePackages = "com.bank.app.domain.staging.repository", entityManagerFactoryRef = "stagingEntityManagerFactory", transactionManagerRef = "stagingTransactionManager")

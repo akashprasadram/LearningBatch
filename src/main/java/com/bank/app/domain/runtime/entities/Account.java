@@ -1,7 +1,6 @@
 package com.bank.app.domain.runtime.entities;
 
 import com.bank.app.util.AccountStatus;
-import com.bank.app.util.ValidationStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;

@@ -1,11 +1,11 @@
 package com.bank.app.api.staging.services;
 
-import java.util.List;
-
 import com.bank.app.api.staging.dto.StgRelationshipDTO;
-import com.bank.app.domain.staging.entities.StgRelationship;
 import com.bank.app.domain.common.error.exceptions.DataIngestionError;
 import com.bank.app.domain.common.error.exceptions.DataNotFoundException;
+import com.bank.app.domain.staging.entities.StgRelationship;
+
+import java.util.List;
 
 public interface StgRelationshipService {
 	public List<StgRelationshipDTO> getRelationships();

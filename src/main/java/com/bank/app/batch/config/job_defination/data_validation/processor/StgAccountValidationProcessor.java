@@ -1,8 +1,6 @@
 package com.bank.app.batch.config.job_defination.data_validation.processor;
 
-import com.bank.app.domain.common.error.exceptions.StgAccountValidationError;
 import com.bank.app.domain.staging.entities.StgAccount;
-
 import com.bank.app.domain.staging.entities.StgRelationship;
 import com.bank.app.domain.staging.repository.StgRelationshipRepo;
 import com.bank.app.util.AccountStatus;
@@ -35,7 +33,7 @@ public class StgAccountValidationProcessor implements ItemProcessor<StgAccount, 
         LOGGER.info("After Validation Stg Account : {}",stgAccount);
         return stgAccount;
     }
-    public synchronized void validateAccount(StgAccount stgAccount) throws StgAccountValidationError {
+    public void validateAccount(StgAccount stgAccount) {
         LOGGER.info("Inside validateAccount() with Stg Account : {}",stgAccount);
         List<String> comments=new ArrayList<>();
 
@@ -46,14 +44,13 @@ public class StgAccountValidationProcessor implements ItemProcessor<StgAccount, 
             LOGGER.info("Validation Error with Comment : {}" , comments);
             stgAccount.setComment(comments.toString());
             stgAccount.setValidationStatus(ValidationStatus.FAIL);
-            //throw new StgAccountValidationError("Account validation failed with Errors : "+comments.toString());
         }
         else {
             stgAccount.setValidationStatus(ValidationStatus.PASS);
         }
     }
 
-    private static void closingDataValidator(StgAccount stgAccount, List<String> comments) {
+    private void closingDataValidator(StgAccount stgAccount, List<String> comments) {
         if(stgAccount.getStatus().equals(AccountStatus.CLOSE) && stgAccount.getClosingDate()==null){
             comments.add("Account is closed but closing date is not mentioned");
         }

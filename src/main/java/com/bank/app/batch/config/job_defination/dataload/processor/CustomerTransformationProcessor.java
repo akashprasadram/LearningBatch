@@ -1,7 +1,6 @@
 package com.bank.app.batch.config.job_defination.dataload.processor;
 
 import com.bank.app.domain.runtime.entities.Customer;
-import com.bank.app.domain.staging.entities.StgAccount;
 import com.bank.app.domain.staging.entities.StgCustomer;
 import com.bank.app.domain.staging.repository.StgCustomerRepo;
 import com.bank.app.util.ValidationStatus;
