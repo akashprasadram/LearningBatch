@@ -1,5 +1,11 @@
 package com.bank.app.config.datasource;
 
+import java.util.HashMap;
+import java.util.Map;
+
+
+import javax.sql.DataSource;
+
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -11,10 +17,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-
-import javax.sql.DataSource;
-import java.util.HashMap;
-import java.util.Map;
 
 @Configuration
 @EnableJpaRepositories(basePackages =  "com.bank.app.domain.runtime.repository"
@@ -31,7 +33,7 @@ public class RuntimeDBConfig {
 		return DataSourceBuilder.create().build();
 	}
 	
-	@Bean(name="runtimeEntityManagerFactory")
+	@Bean
 	LocalContainerEntityManagerFactoryBean runtimeEntityManagerFactory(EntityManagerFactoryBuilder builder, @Qualifier("runtimeDataSource") DataSource dataSource) {
 		
 		Map<String, String> hibernateProperties = new HashMap<>();
@@ -45,7 +47,7 @@ public class RuntimeDBConfig {
 	                .build();
 	}
 	
-	@Bean(name="runtimeTransactionManager")
+	@Bean
 	JpaTransactionManager runtimeTransactionManager( @Qualifier("runtimeEntityManagerFactory") EntityManagerFactory prodEntityManagerFactory) {
 		return new JpaTransactionManager(prodEntityManagerFactory);
 	}

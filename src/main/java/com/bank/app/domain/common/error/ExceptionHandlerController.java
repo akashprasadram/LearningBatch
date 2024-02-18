@@ -1,10 +1,10 @@
-package com.bank.app.api.handler.error.controller;
+package com.bank.app.domain.common.error;
 
-import com.bank.app.domain.common.error.exceptions.DataIngestionError;
+import com.bank.app.domain.common.error.exceptions.DataCreationError;
 import com.bank.app.domain.common.error.exceptions.DataNotFoundException;
 import com.bank.app.domain.common.error.exceptions.InvalidJobNameException;
 import com.bank.app.domain.common.error.exceptions.JobStartException;
-import com.bank.app.api.handler.error.model.StatusResponse;
+import com.bank.app.domain.common.error.model.StatusResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class ExceptionHandlerController {
 
     private static final Logger LOGGER= LoggerFactory.getLogger(ExceptionHandlerController.class);
-    @ExceptionHandler(DataIngestionError.class)
+    @ExceptionHandler(DataCreationError.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<StatusResponse> dataCreationErrorExceptionHandler(Exception e) {
 

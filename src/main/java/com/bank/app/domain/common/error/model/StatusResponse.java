@@ -1,4 +1,4 @@
-package com.bank.app.api.handler.error.model;
+package com.bank.app.domain.common.error.model;
 
 import lombok.Getter;
 import lombok.Setter;

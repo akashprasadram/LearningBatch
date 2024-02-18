@@ -1,11 +1,9 @@
 package com.bank.app.domain.staging.entities;
 
 import com.bank.app.util.AccountStatus;
-import com.bank.app.util.ValidationStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -45,13 +43,6 @@ public class StgAccount {
 	@JsonIgnore
 	private List<StgRelationship> stgRelationships;
 
-	@Column(name = "validation_status", nullable = true)
-	private ValidationStatus validationStatus;
-
-	@Column(name = "comment", nullable = true)
-	@Size(max=500)
-	private String comment;
-
 	@Override
 	public String toString() {
 		return "StgAccount{" +
@@ -59,8 +50,6 @@ public class StgAccount {
 				", status=" + status +
 				", openingDate=" + openingDate +
 				", closingDate=" + closingDate +
-				", validationStatus=" + validationStatus +
-				", comment='" + comment + '\'' +
 				'}';
 	}
 }

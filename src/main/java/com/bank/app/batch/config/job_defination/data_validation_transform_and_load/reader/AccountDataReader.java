@@ -1,4 +1,4 @@
-package com.bank.app.batch.config.job_defination.data_validation.reader;
+package com.bank.app.batch.config.job_defination.data_validation_transform_and_load.reader;
 
 import com.bank.app.domain.staging.entities.StgAccount;
 import jakarta.persistence.EntityManagerFactory;
@@ -17,7 +17,7 @@ public class AccountDataReader {
     private static final Logger LOGGER= LoggerFactory.getLogger(AccountDataReader.class);
 
 
-    private final EntityManagerFactory stagingEntityManagerFactory;
+    EntityManagerFactory stagingEntityManagerFactory;
 
     public AccountDataReader(@Qualifier("stagingEntityManagerFactory") EntityManagerFactory stagingEntityManagerFactory) {
         this.stagingEntityManagerFactory = stagingEntityManagerFactory;

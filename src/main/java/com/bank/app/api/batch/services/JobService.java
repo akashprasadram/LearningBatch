@@ -25,7 +25,7 @@ public class JobService {
 
     private final Job dataValidationTransformAndLoadJob;
 
-    public JobService(JobLauncher jobLauncher,@Qualifier("dataValidationJobBean") Job dataValidationTransformAndLoadJob) {
+    public JobService(JobLauncher jobLauncher,@Qualifier("dataValidationTransformAndLoadJobBean") Job dataValidationTransformAndLoadJob) {
         this.jobLauncher = jobLauncher;
         this.dataValidationTransformAndLoadJob = dataValidationTransformAndLoadJob;
     }
