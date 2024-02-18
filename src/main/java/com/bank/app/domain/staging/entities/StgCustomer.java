@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 
+import com.bank.app.util.ValidationStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
@@ -41,6 +42,12 @@ public class StgCustomer {
 	@OneToMany(mappedBy = "customerId")
 	@JsonIgnore
 	private List<StgRelationship> stgRelationships;
+
+	@Column(name = "validation_status", nullable = true)
+	private ValidationStatus validationStatus;
+
+	@Column(name = "comment", nullable = true)
+	private String comment;
 
 
 }

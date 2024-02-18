@@ -3,7 +3,7 @@ package com.bank.app.api.staging.controller;
 import com.bank.app.api.handler.staging.StgCustomerConverter;
 import com.bank.app.api.staging.dto.StgCustomerDTO;
 import com.bank.app.api.staging.services.StgCustomerService;
-import com.bank.app.domain.common.error.exceptions.DataCreationError;
+import com.bank.app.domain.common.error.exceptions.DataIngestionError;
 import com.bank.app.domain.common.error.exceptions.DataNotFoundException;
 import com.bank.app.domain.staging.entities.StgCustomer;
 import org.slf4j.Logger;
@@ -31,14 +31,14 @@ public class stgCustomerController {
     }
 
     @PostMapping("/customer/")
-    public ResponseEntity<StgCustomerDTO> createCustomer(@RequestBody StgCustomerDTO stgCustomerDTO) throws DataCreationError {
+    public ResponseEntity<StgCustomerDTO> createCustomer(@RequestBody StgCustomerDTO stgCustomerDTO) throws DataIngestionError {
         LOGGER.info("Inside createCustomer() with Customer : {}", stgCustomerDTO);
         StgCustomer stgCustomer = stgCustomerConverter.customerConverter(stgCustomerDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(stgCustomerService.createCustomer(stgCustomer));
     }
 
     @PostMapping("/customers/")
-    public ResponseEntity<List<StgCustomerDTO>> createAllCustomer(@RequestBody List<StgCustomerDTO> stgCustomerDTOS) throws DataCreationError {
+    public ResponseEntity<List<StgCustomerDTO>> createAllCustomer(@RequestBody List<StgCustomerDTO> stgCustomerDTOS) throws DataIngestionError {
         LOGGER.info("Inside createAllCustomer() with Customers : {}", stgCustomerDTOS);
         List<StgCustomer> stgCustomers = stgCustomerConverter.customerListConverter(stgCustomerDTOS);
         return ResponseEntity.status(HttpStatus.CREATED).body(stgCustomerService.createCustomers(stgCustomers));

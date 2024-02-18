@@ -1,6 +1,7 @@
-package com.bank.app.batch.config.job_defination.data_validation_transform_and_load.writer;
+package com.bank.app.batch.config.job_defination.data_validation.writer;
 
 import com.bank.app.domain.runtime.entities.Account;
+import com.bank.app.domain.staging.entities.StgAccount;
 import jakarta.persistence.EntityManagerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,17 +16,17 @@ public class AccountDataWriter {
 
     private static final Logger LOGGER= LoggerFactory.getLogger(AccountDataWriter.class);
 
-    EntityManagerFactory runtimeEntityManagerFactory;
+    private final EntityManagerFactory stagingEntityManagerFactory;
 
-    public AccountDataWriter(@Qualifier("runtimeEntityManagerFactory") EntityManagerFactory runtimeEntityManagerFactory) {
-        this.runtimeEntityManagerFactory = runtimeEntityManagerFactory;
+    public AccountDataWriter(@Qualifier("stagingEntityManagerFactory") EntityManagerFactory stagingEntityManagerFactory) {
+        this.stagingEntityManagerFactory = stagingEntityManagerFactory;
     }
 
-    @Bean(name="accountWriterBean")
-    JpaItemWriter<Account> accountWriter(){
+    @Bean(name="accountWriter")
+    JpaItemWriter<StgAccount> accountWriter(){
         LOGGER.info("Inside accountWriter()");
-        return new JpaItemWriterBuilder<Account>()
-                .entityManagerFactory(runtimeEntityManagerFactory)
+        return new JpaItemWriterBuilder<StgAccount>()
+                .entityManagerFactory(stagingEntityManagerFactory)
                 .build();
 
     }

@@ -3,7 +3,7 @@ package com.bank.app.api.staging.controller;
 import com.bank.app.api.handler.staging.StgRelationshipConverter;
 import com.bank.app.api.staging.dto.StgRelationshipDTO;
 import com.bank.app.api.staging.services.StgRelationshipService;
-import com.bank.app.domain.common.error.exceptions.DataCreationError;
+import com.bank.app.domain.common.error.exceptions.DataIngestionError;
 import com.bank.app.domain.common.error.exceptions.DataNotFoundException;
 import com.bank.app.domain.staging.entities.StgRelationship;
 import org.slf4j.Logger;
@@ -30,14 +30,14 @@ public class StgRelationshipController {
     }
 
     @PostMapping("/relationship/")
-    public ResponseEntity<StgRelationshipDTO> createRelationship(@RequestBody StgRelationshipDTO stgRelationshipDTO) throws DataCreationError {
+    public ResponseEntity<StgRelationshipDTO> createRelationship(@RequestBody StgRelationshipDTO stgRelationshipDTO) throws DataIngestionError {
         LOGGER.info("Inside createRelationship() with Relationship : {}", stgRelationshipDTO);
         StgRelationship stgRelationship = stgRelationshipConverter.relationshipConverter(stgRelationshipDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(stgRelationshipService.createRelationship(stgRelationship));
     }
 
     @PostMapping("/relationships/")
-    public ResponseEntity<List<StgRelationshipDTO>> createAllRelationship(@RequestBody List<StgRelationshipDTO> stgRelationshipDTOS) throws DataCreationError {
+    public ResponseEntity<List<StgRelationshipDTO>> createAllRelationship(@RequestBody List<StgRelationshipDTO> stgRelationshipDTOS) throws DataIngestionError {
         LOGGER.info("Inside createAllRelationship() with Relationships : {}", stgRelationshipDTOS);
         List<StgRelationship> stgRelationships = stgRelationshipConverter.relationshipListConverter(stgRelationshipDTOS);
         return ResponseEntity.status(HttpStatus.CREATED).body(stgRelationshipService.createRelationships(stgRelationships));

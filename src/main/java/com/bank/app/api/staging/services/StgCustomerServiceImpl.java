@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.bank.app.domain.common.error.exceptions.DataCreationError;
+import com.bank.app.domain.common.error.exceptions.DataIngestionError;
 import com.bank.app.domain.common.error.exceptions.DataNotFoundException;
 import com.bank.app.domain.staging.repository.StgCustomerRepo;
 
@@ -48,21 +48,21 @@ public class StgCustomerServiceImpl implements StgCustomerService {
 	}
 
 	@Override
-	public StgCustomerDTO createCustomer(StgCustomer stgCustomer) throws DataCreationError {
+	public StgCustomerDTO createCustomer(StgCustomer stgCustomer) throws DataIngestionError {
 		LOGGER.info("Inside createCustomer() with StgCustomer : {}", stgCustomer);
 		StgCustomer savedStgCustomer = stgCustomerRepo.save(stgCustomer);
 		if(savedStgCustomer.getCustomerId()==0) {
-			throw new DataCreationError("Unable to create Customer");
+			throw new DataIngestionError("Unable to create Customer");
 		}
 		return stgCustomerConverter.customerDTOConverter(savedStgCustomer);
 	}
 
 	@Override
-	public List<StgCustomerDTO> createCustomers(List<StgCustomer> stgCustomers) throws DataCreationError {
+	public List<StgCustomerDTO> createCustomers(List<StgCustomer> stgCustomers) throws DataIngestionError {
 		LOGGER.info("Inside createCustomers() with StgCustomers : {}", stgCustomers);
 		List<StgCustomer> savedStgCustomers = stgCustomerRepo.saveAll(stgCustomers);
 		if(savedStgCustomers.isEmpty()) {
-			throw new DataCreationError("Unable to create customers");
+			throw new DataIngestionError("Unable to create customers");
 		}
 		return stgCustomerConverter.customerDTOListConverter(savedStgCustomers);
 	}
